@@ -1,0 +1,71 @@
+# ecommerce_estatistica
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Passo 2: Ler o arquivo CSV e carregar os dados em um DataFrame
+df = pd.read_csv('ecommerce_estatistica.csv')
+
+
+# Passo 3: Análise inicial dos dados
+print(df.head())
+
+# Passo 4: Criar os gráficos
+
+# 1. Gráfico de Histograma
+
+plt.figure(figsize=(10, 6))
+sns.histplot(df['Nota'], bins=10, kde=True, color='blue')
+plt.title('Distribuição das Notas dos Produtos')
+plt.xlabel('Nota')
+plt.ylabel('Frequência')
+plt.show()
+
+# 2. Gráfico de Dispersão
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x='Preço', y='N_Avaliações', data=df, color='green')
+plt.title('Relação entre Preço e Quantidade de Avaliações')
+plt.xlabel('Preço')
+plt.ylabel('Quantidade de Avaliações')
+plt.show()
+
+# 3. Mapa de Calor
+
+plt.figure(figsize=(12, 8))
+corr = df.corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm')
+plt.title('Mapa de Calor - Correlação entre Variáveis')
+plt.show()
+
+# 4. Gráfico de Barra
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Gênero', y='Nota', data=df, ci=None, palette='viridis')
+plt.title('Média das Notas por Gênero')
+plt.xlabel('Gênero')
+plt.ylabel('Média das Notas')
+plt.show()
+
+# 5. Gráfico de Pizza
+plt.figure(figsize=(8, 8))
+df['Temporada'].value_counts().plot(kind='pie', autopct='%1.1f%%', colors=['skyblue', 'lightgreen', 'lightcoral', 'gold'])
+plt.title('Distribuição dos Produtos por Temporada')
+plt.ylabel('')
+plt.show()
+
+# 6. Gráfico de Densidade
+plt.figure(figsize=(10, 6))
+sns.kdeplot(df['Preço'], shade=True, color='purple')
+plt.title('Distribuição de Densidade dos Preços')
+plt.xlabel('Preço')
+plt.ylabel('Densidade')
+plt.show()
+
+# 7. Gráfico de Regressão
+plt.figure(figsize=(10, 6))
+sns.regplot(x='Preço', y='N_Avaliações', data=df, color='orange')
+plt.title('Relação entre Preço e Quantidade de Avaliações com Linha de Regressão')
+plt.xlabel('Preço')
+plt.ylabel('Quantidade de Avaliações')
+plt.show()
